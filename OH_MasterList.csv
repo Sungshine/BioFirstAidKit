@@ -1,0 +1,217 @@
+bcwID,CDCID,strainID,Serotype
+BCW_4033,A20a,A20a,H6 Standard Strain
+BCW_4034,AP 320c,AP320c,H8 Standard Strain
+BCW_4035,Bi 7575-41,Bi7575-41,H9 Standard Strain
+BCW_4036,Su 4321-41,Su4321-41,H11 Standard Strain
+BCW_4037,A 18d,A18d,H19 Standard Strain
+BCW_4038,HW26,HW26,H25 Standard Strain
+BCW_4039,HW28,HW28,H27 Standard Strain
+BCW_4040,HW33,HW33,H31 Standard Strain
+BCW_4041,HW35,HW35,H33 Standard Strain
+BCW_4042,BP 12665,BP12665,H34 Standard Strain
+BCW_4043,5017-53,5017-53,H36 Standard Strain
+BCW_4044,P9c,P9c,H42 Standard Strain
+BCW_4045,781-55,781-55,H44 Standard Strain
+BCW_4046,4106-54,4106-54,H45 Standard Strain
+BCW_4047,5306-56,5306-56,H46 Standard Strain
+BCW_4048,1755-58,1755-58,H47 Standard Strain
+BCW_4049,2147-59,2147-59,H49 Standard Strain
+BCW_4050,C2187-84,C2187-84,H52 Standard Strain
+BCW_4051,E408/68,E408-68,H53 Standard Strain
+BCW_4052,E223/69,E223-69,H54 Standard Strain
+BCW_4053,E2987-73,E2987-73,H55 Standard Strain
+BCW_4054,U 5-41,U5-41,O1.H7 Standard Strain
+BCW_4055,U 9-41,U9-41,O2.H4 Standard Strain
+BCW_4056,U 14-41,U14-41,O3 Standard Strain
+BCW_4057,U 4-41,U4-41,O4.H5 Standard Strain
+BCW_4058,U 1-41,U1-41,O5 Standard Strain
+BCW_4059,Bi 7458-41,Bi7458-41,O6 Standard Strain
+BCW_4060,Bi 7509-41,Bi7509-41,O7 Standard Strain
+BCW_4061,G 3404-41,G3404-41,O8 Standard Strain
+BCW_4062,Bi 316-42,Bi316-42,O9.H12 Standard Strain
+BCW_4063,Bi 623-42,Bi623-42,O11 Standard Strain
+BCW_4064,Bi 626-42,Bi626-42,O12 Standard Strain
+BCW_4065,Su 4411-41,Su4411-41,O14 Standard Strain
+BCW_4066,F 7902-41,F7902-41,O15 Standard Strain
+BCW_4067,F 11119-41,F11119-41,O16 Standard Strain
+BCW_4068,K 12a,K12a,O17.H18 Standard Strain
+BCW_4069,F 10018-41,F10018-41,O18ab Standard Strain
+BCW_4070,F 8858-41,F8858-41,O19a Standard Strain
+BCW_4071,F 8188-41,F8188-41,O19ab Standard Strain
+BCW_4072,P 7a,P7a,O20 Standard Strain
+BCW_4073,E 19a,E19a,O21 Standard Strain
+BCW_4074,E 14a,E14a,O22 Standard Strain
+BCW_4075,E 39a,E39a,O23.H15 Standard Strain
+BCW_4076,E 41a,E41a,O24 Standard Strain
+BCW_4077,E 47a,E47a,O25 Standard Strain
+BCW_4078,H 311b,H311b,O26 Standard Strain
+BCW_4079,F 9884-41,F9884-41,O27 Standard Strain
+BCW_4080,K 1a,K1a,O28 Standard Strain
+BCW_4081,909-51,909-51,O28ac Standard Strain
+BCW_4082,Su 4338-41,Su4338-41,O29 Standard Strain
+BCW_4083,P 2a,P2a,O30 Standard Strain
+BCW_4084,E 40,E40,O33 Standard Strain
+BCW_4085,H 304,H304,O34 Standard Strain
+BCW_4086,E 77a,E77a,O35 Standard Strain
+BCW_4087,H 502a,H502a,O36 Standard Strain
+BCW_4088,H 510c,H510c,O37 Standard Strain
+BCW_4089,F 11621-41,F11621-41,O38 Standard Strain
+BCW_4090,H 7,H7,O39 Standard Strain
+BCW_4091,H 316,H316,O40 Standard Strain
+BCW_4092,H 710c,H710c,O41 Standard Strain
+BCW_4093,P 11a,P11a,O42.H37 Standard Strain
+BCW_4094,Bi 7455-41,Bi7455-41,O43.H2 Standard Strain
+BCW_4095,H 702c,H702c,O44 Standard Strain
+BCW_4096,H 61,H61,O45 Standard Strain
+BCW_4097,P 1c,P1c,O46 Standard Strain
+BCW_4098,U 8-41,U8-41,O48 Standard Strain
+BCW_4099,U 12-41,U12-41,O49 Standard Strain
+BCW_4100,U 19-41,U19-41,O51 Standard Strain
+BCW_4101,U 20-41,U20-41,O52 Standard Strain
+BCW_4102,Bi 7327-41,Bi7327-41,O53.H3 Standard Strain
+BCW_4103,Bi 3972-41,Bi3972-41,O54 Standard Strain
+BCW_4104,Su 3912-41,Su3912-41,O55 Standard Strain
+BCW_4105,Su 3684-41,Su3684-41,O56 Standard Strain
+BCW_4106,F 8198-41,F8198-41,O57 Standard Strain
+BCW_4107,F 8962-41,F8962-41,O58 Standard Strain
+BCW_4108,F 9095-41,F9095-41,O59 Standard Strain
+BCW_4109,F 10167a-41,F10167a-41,O60 Standard Strain
+BCW_4110,F 10167b-41,F10167b-41,O61 Standard Strain
+BCW_4111,F 10524-41,F10524-41,O62 Standard Strain
+BCW_4112,F 10598-41,F10598-41,O63 Standard Strain
+BCW_4113,K 6b,K6b,O64 Standard Strain
+BCW_4114,P 7d,P7d,O68 Standard Strain
+BCW_4115,P 9b,P9b,O69.H38 Standard Strain
+BCW_4116,P 10a,P10a,O71 Standard Strain
+BCW_4117,P 12a,P12a,O73 Standard Strain
+BCW_4118,E 3a,E3a,O74.H39 Standard Strain
+BCW_4119,E 3b,E3b,O75 Standard Strain
+BCW_4120,E 10,E10,O77 Standard Strain
+BCW_4121,E 38,E38,O78 Standard Strain
+BCW_4122,E 49,E49,O79.H40 Standard Strain
+BCW_4123,E 71,E71,O80 Standard Strain
+BCW_4124,H 5,H5,O81 Standard Strain
+BCW_4125,H 14,H14,O82 Standard Strain
+BCW_4126,H 17a,H17a,O83 Standard Strain
+BCW_4127,H 19,H19,O84 Standard Strain
+BCW_4128,H 23,H23,O85 Standard Strain
+BCW_4129,H 35,H35,O86 Standard Strain
+BCW_4130,H 40,H40,O87 Standard Strain
+BCW_4131,H 53,H53,O88 Standard Strain
+BCW_4132,H 68,H68,O89 Standard Strain
+BCW_4133,H 77,H77,O90 Standard Strain
+BCW_4134,H 307b,H307b,O91 Standard Strain
+BCW_4135,H 308b,H308b,O93 Standard Strain
+BCW_4136,H 319,H319,O96 Standard Strain
+BCW_4137,H 320a,H320a,O97 Standard Strain
+BCW_4138,H 510d,H510d,O98 Standard Strain
+BCW_4139,H 504c,H504c,O99 Standard Strain
+BCW_4140,H 501a,H501a,O101 Standard Strain
+BCW_4141,H 511,H511,O102 Standard Strain
+BCW_4142,H 515b,H515b,O103 Standard Strain
+BCW_4143,H 519,H519,O104 Standard Strain
+BCW_4144,H 520b,H520b,O105 Standard Strain
+BCW_4145,H 705,H705,O107 Standard Strain
+BCW_4146,H 708b,H708b,O108 Standard Strain
+BCW_4147,H 709c,H709c,O109 Standard Strain
+BCW_4148,H 711c,H711c,O110 Standard Strain
+BCW_4149,Stoke W,StokeW,O111 Standard Strain
+BCW_4150,1411-50,1411-50,O112ab Standard Strain
+BCW_4151,1685,1685,O112ac Standard Strain
+BCW_4152,6182-50,6182-50,O113 Standard Strain
+BCW_4153,W 27,W27,O115 Standard Strain
+BCW_4154,W 30,W30,O117 Standard Strain
+BCW_4155,W 31,W31,O118 Standard Strain
+BCW_4156,W 34,W34,O119 Standard Strain
+BCW_4157,W 35,W35,O120 Standard Strain
+BCW_4158,W 39,W39,O121 Standard Strain
+BCW_4159,W 43,W43,O123 Standard Strain
+BCW_4160,227,227,O124 Standard Strain
+BCW_4161,Canioni (2745-53),Canioni,O125ab Standard Strain
+BCW_4162,E 611 (6021-50),E611,O126 Standard Strain
+BCW_4163,Holcomb (4932-53),Holcomb,O127 Standard Strain
+BCW_4164,Cigleris (56-54),Cigleris,O128ab Standard Strain
+BCW_4165,178-54 (1986-54),178-54,O129 Standard Strain
+BCW_4166,4866-53,4866-53,O130 Standard Strain
+BCW_4167,HW 27,HW27,O131.H26 Standard Strain
+BCW_4168,HW 30,HW30,O132.H28 Standard Strain
+BCW_4169,HW 31,HW31,O133.H29 Standard Strain
+BCW_4170,4370-53,4370-53,O134.H35 Standard Strain
+BCW_4171,Coli pecs,Coli-pecs,O135 Standard Strain
+BCW_4172,1111-55,1111-55,O136 Standard Strain
+BCW_4173,RVC 1787,RVC1787,O137.H41 Standard Strain
+BCW_4174,63-57,63-57,O139 Standard Strain
+BCW_4175,149-51,149-51,O140.H43 Standard Strain
+BCW_4176,RVC 2907,RVC2907,O141 Standard Strain
+BCW_4177,C 771,C771,O142 Standard Strain
+BCW_4178,4608-58,4608-58,O143 Standard Strain
+BCW_4179,1624-56,1624-56,O144 Standard Strain
+BCW_4180,E 1385 (3),E1385,O145 Standard Strain
+BCW_4181,2950-54,2950-54,O146 Standard Strain
+BCW_4182,G 1253,G1253,O147 Standard Strain
+BCW_4183,E 519-66,E519-66,O148 Standard Strain
+BCW_4184,D616 (CS 1483),D616,O149 Standard Strain
+BCW_4185,880-67,880-67,O151 Standard Strain
+BCW_4186,1184-68,1184-68,O152 Standard Strain
+BCW_4187,14097,14097,O153 Standard Strain
+BCW_4188,E 1551-68,E1551-68,O154 Standard Strain
+BCW_4189,E 1529-68,E1529-68,O155 Standard Strain
+BCW_4190,E 1585-68,E1585-68,O156 Standard Strain
+BCW_4191,A 2,A2,O157 Standard Strain
+BCW_4192,E 1020-72,E1020-72,O158 Standard Strain
+BCW_4193,E 2476-72,E2476-72,O159 Standard Strain
+BCW_4194,E 110-69,E110-69,O160 Standard Strain
+BCW_4195,10B1/1,10B1-1,O162 Standard Strain
+BCW_4196,SN3B/1,SN3B-1,O163 Standard Strain
+BCW_4197,145/46,145-46,O164 Standard Strain
+BCW_4198,3866-54,3866-54,O166 Standard Strain
+BCW_4199,E 10702,E10702,O167 Standard Strain
+BCW_4200,179-54,179-54,O168 Standard Strain
+BCW_4201,3288-85,3288-85,O172 Standard Strain
+BCW_4202,2531-54,2531-54,O174 Standard Strain
+BCW_4203,2533-54,2533-54,O175 Standard Strain
+BCW_4204,E 29518/83,E 29518-83,O176 Standard Strain
+BCW_4205,E 40874/85,E 40874-85,O177 Standard Strain
+BCW_4206,E 54071/88,E 54071-88,O178 Standard Strain
+BCW_4207,E 43478,E43478,O179 Standard Strain
+BCW_4208,86-381,86-381,O180 Standard Strain
+BCW_4209,92-1250,92-1250,O181 Standard Strain
+BCW_4210,99-1287,99-1287,O182 Standard Strain
+BCW_4211,99-2442,99-2442,O183 Standard Strain
+BCW_4212,Rki 01-9679,Rki01-9679,O184 Standard Strain
+BCW_4213,99-6301,99-6301,O185 Standard Strain
+BCW_4214,D 463,D463,O186 Standard Strain
+BCW_4215,C 559-59,C559-59,O187 Standard Strain
+BCW_5111,P 6a,P6a,O32 Standard Strain
+BCW_5112,U 18-41,U18-41,O50 Standard Strain
+BCW_5113,K 11a,K11a,O65 Standard Strain
+BCW_5114,P 1a,P1a,O66 Standard Strain
+BCW_5115,P 9c,P9c,O70 Standard Strain
+BCW_5116,E 5d,E5d,O76 Standard Strain
+BCW_5117,H 521a,H521a,O106 Standard Strain
+BCW_5118,W 28,W28,O116 Standard Strain
+BCW_5119,62-57,62-57,O138 Standard Strain
+BCW_5120,E78634,E78634,O165 Standard Strain
+BCW_6211,Bi8337-41,Bi8337-41,O10 Standard Strain
+BCW_6212,H308a,H308a,O92 Standard Strain
+BCW_6213,H311a,H311a,O95 Standard Strain
+BCW_6214,H509a,H509a,O100 Standard Strain
+BCW_6215,26w,26w,O114 Standard Strain
+BCW_6216,1935,1935,O150 Standard Strain
+BCW_6217,E223-69,E223-69,O161 Standard Strain
+BCW_6218,1792-54,1792-54,O169 Standard Strain
+BCW_6219,745-54,745-54,O170 Standard Strain
+BCW_6220,198,198,O171 Standard Strain
+BCW_6221,L119B-10,L119B-10,O173 Standard Strain
+BCW_S001,Su1242,Su1242,H1 Standard Strain
+BCW_S002,F8316-41,F8316-41,H16 Standard Strain
+BCW_S003,P12b,P12b,H17 Standard Strain
+BCW_S004,H3306,H3306,H20 Standard Strain
+BCW_S005,U11a-44,U11a-44,H21 Standard Strain
+BCW_S006,H23w,H23w,H23 Standard Strain
+BCW_S007,H25w,H25w,H24 Standard Strain
+BCW_S008,H32w,H32w,H30 Standard Strain
+BCW_S009,H34w,H34w,H32 Standard Strain
+BCW_S010,P4,P4,H48 Standard Strain
+BCW_S011,AB1767,AB1767,H51 Standard Strain
+BCW_S012,SN2N-1,SN2-N1,H56 Standard Strain
