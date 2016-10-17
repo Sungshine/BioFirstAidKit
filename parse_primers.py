@@ -16,8 +16,8 @@ right_primer = []
 leftright_primer = []
 primer_dict = dict()
 
-with open("/Users/sungshine/Downloads/summary.table", "rb") as infile:
-# with open("/home/sim/Projects/CIMS/salmonella/primers/summary.table", "rb") as infile:
+# with open("/Users/sungshine/Downloads/summary.table", "rb") as infile:                    # macbook
+with open("/home/sim/Projects/CIMS/salmonella/primers/summary.table", "rb") as infile:      # pulsestar3
     reader = csv.reader(infile, delimiter="\t")
 
     for line in reader:
@@ -32,7 +32,7 @@ with open("/Users/sungshine/Downloads/summary.table", "rb") as infile:
             primer_dict[line[1]] = [ l_primer, r_primer ]
 
 for key, value in primer_dict.items():
-    print(key, value)
+    print key, "\t", value[0], "\t", value[1]
 
 
 
