@@ -1,14 +1,12 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 
 from Bio.Emboss.PrimerSearch import InputRecord, OutputRecord, Amplifier, read
 
-handle = open("/Users/sungshine/Downloads/2012K-1420_LargeContigs.fna.primersearch", "r")
+# handle = open("/Users/sungshine/Downloads/2012K-1420_LargeContigs.fna.primersearch", "r")
+handle = open("/home/sim/Projects/CIMS/salmonella/2012K-1420_LargeContigs.fna.primersearch", "r")  # pulsestar3
 
-obj = read(handle)
+hit_dict = read(handle)
 
-# print(obj)
-# for k, v in obj:
-#     print(k, v)
-
-for i in obj:
-    print(i)
+for name in hit_dict.amplifiers:
+    for amplifier in hit_dict.amplifiers[name]:
+        print(name, "\n", amplifier.hit_info, "\n", amplifier.length, "\n")
