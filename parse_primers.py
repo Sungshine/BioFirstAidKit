@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python
 
 """ Parse primer pairs from summary.table
 
@@ -17,7 +17,7 @@ leftright_primer = []
 primer_dict = dict()
 
 # with open("/Users/sungshine/Downloads/summary.table", "rb") as infile:                    # macbook
-with open("/home/sim/Projects/CIMS/salmonella/primers/summary.table", "rb") as infile:      # pulsestar3
+with open("/home/sim/Projects/CIMS/salmonella/summary.table", "rb") as infile:      # pulsestar3
     reader = csv.reader(infile, delimiter="\t")
 
     for line in reader:
@@ -31,10 +31,30 @@ with open("/home/sim/Projects/CIMS/salmonella/primers/summary.table", "rb") as i
         else:
             primer_dict[line[1]] = [ l_primer, r_primer ]
 
-for key, value in primer_dict.items():
-    print key, "\t", value[0], "\t", value[1]
+# for key, value in primer_dict.items():
+#     print key, "\t", value[0], "\t", value[1]
+
+primer_name = []
+primer_set_dict = dict()
+
+for key in primer_dict.keys():
+
+    prokka_id = key.split(".")[3]
+    pair = key.split(".")[9]
+    if prokka_id in primer_set_dict:
+        primer_set_dict[prokka_id].append(pair)
+    else:
+        primer_set_dict[prokka_id] = [pair]
 
 
+
+
+    # node = key.split(".")[1]
+    # id = key.split(".")[2]
+    # primer_name.append("{}.{}.{}.{}".format(node, id, prokka, pair))
+
+for k, v in primer_set_dict.items():
+    print(k, v)
 
     # Sanity checking the unique combinations of primer pairs
     #

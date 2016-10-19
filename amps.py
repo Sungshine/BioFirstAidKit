@@ -30,8 +30,10 @@ class Amplifier(object):
         self.amp_len = 0
         self.contig_id = ""
         self.contig_len = 0
+        self.f_primer = ""
         self.f_start = 0
         self.f_mismatch = 0
+        self.r_primer = ""
         self.r_start = 0
         self.r_mismatch = 0
 
@@ -60,11 +62,13 @@ def Read(handle):
         elif "forward strand" in line:
             f_start = line.split(" ")[5]
             f_mismatch = line.split(" ")[7]
+            amplifier.f_primer = line.split(" ")[0].lstrip("\t")
             amplifier.f_start = int(f_start)
             amplifier.f_mismatch = int(f_mismatch)
         elif "reverse strand" in line:
             r_start = line.split(" ")[5].strip("[]")
             r_mismatch = line.split(" ")[7]
+            amplifier.r_primer = line.split(" ")[0].lstrip("\t")
             amplifier.r_start = int(r_start)
             amplifier.r_mismatch = int(r_mismatch)
         elif line.startswith("\tAmplimer length: "):
@@ -89,8 +93,10 @@ if __name__ == "__main__":
             print("gene name = {}".format(name))
             print("contig id = {}".format(amplifier.contig_id))
             print("contig len = {}".format(amplifier.contig_len))
+            print("forward primer = {}".format(amplifier.f_primer))
             print("forward start = {}".format(amplifier.f_start))
             print("forward mismatches = {}".format(amplifier.f_mismatch))
+            print("revers primer = {}".format(amplifier.r_primer))
             print("reverse start = {}".format(amplifier.r_start))
             print("reverse mismatches = {}".format(amplifier.r_mismatch))
             print("amplicon length = {}".format(amplifier.amp_len))
