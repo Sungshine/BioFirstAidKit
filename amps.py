@@ -83,8 +83,8 @@ def Read(handle):
 if __name__ == "__main__":
 
 
-    # input = open("/Users/sungshine/Downloads/2012K-1420_LargeContigs.fna.primersearch", "r")  # macbook
-    handle = open("/home/sim/Projects/CIMS/salmonella/2012K-1420_LargeContigs.fna.primersearch", "r")  # pulsestar3
+    handle = open("/Users/sungshine/Downloads/2012K-1420_LargeContigs.fna.primersearch", "r")  # macbook
+    # handle = open("/home/sim/Projects/CIMS/salmonella/2012K-1420_LargeContigs.fna.primersearch", "r")  # pulsestar3
 
     my_dict = Read(handle)
 
