@@ -17,7 +17,7 @@ leftright_primer = []
 primer_dict = dict()
 
 # with open("/Users/sungshine/Downloads/summary.table", "rb") as infile:                    # macbook
-with open("/home/sim/Projects/CIMS/salmonella/summary.table", "rb") as infile:      # pulsestar3
+with open("/home/sim/Projects/CIMS/salmonella/summary.table", "r") as infile:      # pulsestar3
     reader = csv.reader(infile, delimiter="\t")
 
     for line in reader:
