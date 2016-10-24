@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-""" Descriptive Text Goes Here
+""" To be deleted.
 
 """
 

@@ -26,14 +26,15 @@ for line in reader:
 # print(inPrimers)
 summaryTable.close()
 
-# seqall = '/Users/sungshine/Downloads/sakai.fasta'
-# infile = '/Users/sungshine/Downloads/sakaiPrimers.txt'
-# outfile = '/Users/sungshine/Downloads/sakai.primersearch.out'
+seqall = '/Users/sungshine/Downloads/ATCC9150.fasta'
+infile = '/Users/sungshine/Downloads/ATCC9150_Primers.txt'
+outfile = '/Users/sungshine/Downloads/atcc9150.primersearch.out'
 
-seqall = '/home/sim/Projects/CIMS/salmonella/ATCC9150.fasta'
-infile = '/home/sim/Projects/CIMS/salmonella/ATCC9150primers.txt'
-outfile = '/home/sim/Projects/CIMS/salmonella/ATCC9150.primersearch.out'
-mismatchpercentage = 5
+# seqall = '/home/sim/Projects/CIMS/salmonella/ATCC9150.fasta'
+# infile = '/home/sim/Projects/CIMS/salmonella/ATCC9150primers.txt'
+# outfile = '/home/sim/Projects/CIMS/salmonella/ATCC9150.primersearch.out'
+
+mismatchpercentage = 3
 
 emboss = PrimerSearchCommandline(r'/usr/bin/primersearch',
                                  seqall=seqall,

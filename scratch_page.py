@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 
-""" Descriptive Text Goes Here
+""" Attempt at piping everything starting from:
+
+summary.table, emboss and kraken starting with class based gene objects
 
 """
 

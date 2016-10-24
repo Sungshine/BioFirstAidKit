@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 
-""" Descriptive Text Goes Here
+""" Attempt at wrapping BioPython.EMBOSS module.
+
+Used for testing specificity of primer sets.
 
 """
 

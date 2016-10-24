@@ -1,6 +1,8 @@
 #!/usr/bin/python
 
-""" Parse primer pairs from summary.table
+""" Parse primer pairs from summary.table file.
+
+Deprecated. Use wrap_PrimerSearch.py instead.
 
 """
 

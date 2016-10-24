@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-""" Descriptive Text Goes Here
+""" Modified classes and methods from BioPython.EMBOSS module.
 
 """
 
