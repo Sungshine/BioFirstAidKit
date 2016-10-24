@@ -16,16 +16,14 @@
 # Send an email when the job completes
 #$ -m e
 ##################################################################
-
 source /etc/profile.d/modules.sh
 
 # global variables
 KRAKEN_DB=$HOME/Projects/CIMS/salmonella/kraken/standard_db
 KRAKEN_OUT=$HOME/Projects/CIMS/salmonella/kraken/results
-#READS = $@;
 
 module load kraken/0.10.5
 
-kraken --fasta-input --threads=16 --db=$KRAKEN_DB --output=$KRAKEN_OUT/$(basename $1).sequence.kraken "$1"
+kraken --fasta-input --threads=16 --preload --unclassified-out=$KRAKEN_OUT/unclassified/$(basename $1).unclassified --db=$KRAKEN_DB --output=$KRAKEN_OUT/$(basename $1).sequence.kraken "$1"
 
 module unload kraken/0.10.5
