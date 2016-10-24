@@ -6,7 +6,7 @@
 #$ -S /bin/sh
 
 # The -N option sets the name of the job. This will show up in 'qstat'
-#$ -N Prokka_Sungshine
+#$ -N prokka_sungshine
 
 # This sets the default directory that the script will use as its home dir
 # the CWD standards for "current working diretory"
@@ -18,8 +18,6 @@
 # Send an email when the job completes
 #$ -m e
 ##################################################################
-## Now we do work ...
-## From Jo's old cluster account - necessary to run.
 source /etc/profile.d/modules.sh
 
 module load prokka/1.8
