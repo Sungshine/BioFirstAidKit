@@ -43,6 +43,7 @@ handle = open('/home/sim/Projects/CIMS/salmonella/2012K-1420_LargeContigs.fna.em
 
 my_dict = read(handle)
 no_hits = []
+contigHits = []
 
 for name in my_dict.amplifiers:
     # create list of primer pairs that did not amplify
@@ -52,12 +53,14 @@ for name in my_dict.amplifiers:
         ampliconLen = amplifier.length
         contigId = amplifier.hit_info.split('\n')[0]
         contigLen = amplifier.hit_info.split('\n')[1].replace('\tlength=', '').rsplit()[0]
-        # print(amplifier.hit_info.split('\n')[2].split(' ')[0].lstrip('\t')) # fprimer
-        # print(amplifier.hit_info.split('\n')[2].split(' ')[5]) # fstart
-        # print(amplifier.hit_info.split('\n')[2].split(' ')[7]) # fmismatch
-        # print(amplifier.hit_info.split('\n')[3].split(' ')[0].lstrip('\t')) # rprimer
-        # print(amplifier.hit_info.split('\n')[3].split(' ')[5].strip('[]'))  #rstart
-        # print(amplifier.hit_info.split('\n')[3].split(' ')[7])  # rmismatch
+        fprimer = amplifier.hit_info.split('\n')[2].split(' ')[0].lstrip('\t')
+        fstart = amplifier.hit_info.split('\n')[2].split(' ')[5]
+        fmismatch = amplifier.hit_info.split('\n')[2].split(' ')[7]
+        rprimer = amplifier.hit_info.split('\n')[3].split(' ')[0].lstrip('\t')
+        rstart = amplifier.hit_info.split('\n')[3].split(' ')[5].strip('[]')
+        rmismatch = amplifier.hit_info.split('\n')[3].split(' ')[7]
+
+        contigHits.append(contigId)
 
 handle.close()
 

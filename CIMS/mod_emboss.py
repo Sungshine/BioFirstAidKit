@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-""" Modified classes and methods from BioPython.EMBOSS module.
+""" Modified classes and methods from BioPython.Emboss.Applications module.
 
 """
 
@@ -83,8 +83,7 @@ def Read(handle):
 if __name__ == "__main__":
 
 
-    handle = open("/Users/sungshine/Downloads/2012K-1420_LargeContigs.fna.primersearch", "r")  # macbook
-    # handle = open("/home/sim/Projects/CIMS/salmonella/2012K-1420_LargeContigs.fna.primersearch", "r")  # pulsestar3
+    handle = open("/home/sim/Projects/CIMS/salmonella/2012K-1420_LargeContigs.fna.emboss", "r")  # pulsestar3
 
     my_dict = Read(handle)
 
@@ -96,7 +95,7 @@ if __name__ == "__main__":
             print("forward primer = {}".format(amplifier.f_primer))
             print("forward start = {}".format(amplifier.f_start))
             print("forward mismatches = {}".format(amplifier.f_mismatch))
-            print("revers primer = {}".format(amplifier.r_primer))
+            print("reverse primer = {}".format(amplifier.r_primer))
             print("reverse start = {}".format(amplifier.r_start))
             print("reverse mismatches = {}".format(amplifier.r_mismatch))
             print("amplicon length = {}".format(amplifier.amp_len))
