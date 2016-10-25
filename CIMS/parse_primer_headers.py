@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 
-""" Attempt at wrapping BioPython.EMBOSS module.
+""" Parses the headers of the summary.tables file
 
-Used for testing specificity of primer sets.
+The Primer headers represent the programs that the primer sets were generated from.
 
 """
 
