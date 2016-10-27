@@ -163,5 +163,11 @@ if __name__ == "__main__":
 
     # for contigId in uniqContigHits:
     #     print(set(contigHits).intersection(targetContigs))
-    #     print(set(contigHits).intersection(otherContigs))
-    #     print(set(contigHits).intersection(unclassed))
+        print(len(set(contigHits).intersection(targetContigs)))
+        print(set(contigHits).intersection(otherContigs))
+        print(set(contigHits).intersection(unclassed))
+
+        # print(contigHits)
+        # print(len(set(targetContigs).union(otherContigs).union(unclassed)))
+        # for i in noHits:
+        #     print(i)
