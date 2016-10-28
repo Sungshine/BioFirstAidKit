@@ -21,7 +21,7 @@ source /etc/profile.d/modules.sh
 # global variables
 
 EMBOSS_SUMMARY=/scicomp/groups/OID/NCEZID/DFWED/EDLB/share/projects/CIMS/Salmonella/PrimerSpecificity/summary.table.format
-EMBOSS_OUT=/scicomp/groups/OID/NCEZID/DFWED/EDLB/share/projects/CIMS/Salmonella/PrimerSpecificity/embossResults/
+EMBOSS_OUT=/scicomp/groups/OID/NCEZID/DFWED/EDLB/share/projects/CIMS/Salmonella/PrimerSpecificity/embossResults
 
 module load EMBOSS/6.5.7
 
