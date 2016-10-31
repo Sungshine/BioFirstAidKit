@@ -1,10 +1,13 @@
 #!/usr/bin/python3
-
+###############################################################################
 """ Modified classes and methods from BioPython.Emboss.Applications module.
 
 """
 
 # import statements go here
+import os
+import sys
+
 
 __author__ = "Sung Im"
 __email__ = "wla9@cdc.gov"
@@ -111,20 +114,21 @@ def read_kraken_unclassified(handle):
     return unclassifiedContigs
 
 
-def parse_amplicon_info():
-    """ Parse resulting primersearch results.
+def parse_amplicon_info(handle):
+    """ Parse Emboss primersearch output and store hit info as hash object.
 
-    Return lists containing primer ids that did not amplify, hit more than one target, and hit one target.
+    Return lists containing primer ids that did not amplify, hit more than one
+    target, and hit one target.
     """
-    emboss_results = file
+    with open(handle, 'r') as infile:
 
-    noHits = []     # primer ids that did not amplify
-    contigHits = [] # contig ids where amplification occurred
-    multiHits = []  # primer ids that amplified more than one target
-
-    with open(emboss_results, 'r') as infile:
+        noHits = []         # primer ids that did not amplify
+        contigHits = []     # contig ids where amplification occurred
+        multiHits = []      # primer ids that amplified more than one target
+        ampLengths = []
 
         embossRecord = read_primersearch_result(infile)
+
         for name in embossRecord.amplifiers:
             if len(embossRecord.amplifiers[name]) == 0:
                 noHits.append(name)
@@ -132,65 +136,71 @@ def parse_amplicon_info():
                 multiHits.append(name)
             for amplifier in embossRecord.amplifiers[name]:
                 contigHits.append(amplifier.contig_id)
+                ampLengths.append(amplifier.amp_len)
 
-    return noHits, contigHits, multiHits
+    return noHits, contigHits, multiHits, ampLengths
 
+
+def parse_kraken_translate(kraken_labels, kraken_unclassified):
+    """ Parse the kraken-translate and unclassified outputs and return lists.
+
+    """
+    with open(kraken_labels, 'r') as labels, \
+            open(kraken_unclassified) as unclassified:
+
+        targetContigs = []
+        otherContigs = []
+
+        unclassed = read_kraken_unclassified(unclassified)
+        krakenRecord = read_kraken_labels(labels)
+
+        for contig, classification in krakenRecord.taxonomy.items():
+            if 'Salmonella' in classification:
+                targetContigs.append(contig)
+            else:
+                otherContigs.append(contig)
+
+    return targetContigs, otherContigs, unclassed
 
 
 if __name__ == "__main__":
 
-    ## Let's parse the Emboss primer search output for an isolate/assembly
-    primersearch_result_file = '/home/sim/Projects/CIMS/salmonella/embossResults/2013RAN-169-M947-14-049-Loopy_contigs4.fasta.emboss'
-    with open(primersearch_result_file, 'r') as emboss_infile:
+    # Paths to files
+    emboss_dir = '/mnt/scicomp-groups/OID/NCEZID/DFWED/EDLB/share/projects/CIMS/Salmonella/PrimerSpecificity/embossResults/'                        # sys.argv[1]
+    kraken_labels_dir = '/mnt/scicomp-groups/OID/NCEZID/DFWED/EDLB/share/projects/CIMS/Salmonella/PrimerSpecificity/krakenResults/translations/'    # sys.argv[2]
+    kraken_unclassed_dir = '/mnt/scicomp-groups/OID/NCEZID/DFWED/EDLB/share/projects/CIMS/Salmonella/PrimerSpecificity/krakenResults/unclassified/' # sys.argv[3]
 
-        embossRecord = read_primersearch_result(emboss_infile)
+    emboss_paths = [os.path.join(emboss_dir, fn) for fn in next(os.walk(emboss_dir))[2]]
+    kraken_labels_paths = [os.path.join(kraken_labels_dir, fn) for fn in next(os.walk(kraken_labels_dir))[2]]
+    kraken_unclassed_paths = [os.path.join(kraken_unclassed_dir, fn) for fn in next(os.walk(kraken_unclassed_dir))[2]]
 
-        noHits = []         # primer ids that did not amplify
-        contigHits = []     # contig ids where amplification occurred
+    # Let's parse the Emboss primer search outputs
+    for file in emboss_paths:
 
-        for name in embossRecord.amplifiers:
-            # create list of primer pairs that did not amplify
-            if len(embossRecord.amplifiers[name]) == 0:
-                noHits.append(name)
-            # check to see if any primers hit multiple places
-            # if len(embossRecord.amplifiers[name]) > 1:
-            #     print("AHHHHHHHH")
-            for amplifier in embossRecord.amplifiers[name]:
-                # print(amplifier.contig_id)
-                contigHits.append(amplifier.contig_id)
+        noHits, contigHits, multiHits, ampLengths = parse_amplicon_info(file)
 
-        print('nohits = {}'.format(len(noHits)))
-        print('hits = {}'.format(len(contigHits)))
-        print('uniq_hits = {}'.format(len(set(contigHits))
+        print("##########__{}__##########".format(os.path.basename(file)))
+        print('emboss.noHits = {}'.format(len(noHits)))
+        print('emboss.contigHits = {}'.format(len(contigHits)))
+        print('emboss.uniq_hits = {}'.format(len(set(contigHits))))
+        try:
+            print('amp-length-range = {} - {}'.format(min(ampLengths), max(ampLengths)))
+        except ValueError:
+            pass
 
-        ## Let's parse the kraken-translate output for the same file
-        kraken_labels = '/home/sim/Projects/CIMS/salmonella/2013RAN-169-M947-14-049-Loopy_contigs4.sequence.labels'
-        kraken_unclassified = '/home/sim/Projects/CIMS/salmonella/2013RAN-169-M947-14-049-Loopy_contigs4.fasta.unclassified'
-        with open(kraken_labels, 'r') as labels, open(kraken_unclassified, 'r') as unclassified:
+        # Let's parse the kraken-translate output for the same file
+        in_label = kraken_labels_dir + os.path.basename(file).rstrip('.emboss') + '.sequence.kraken.labels'
+        in_unclassified = kraken_unclassed_dir + os.path.basename(file).rstrip('.emboss') + '.unclassified'
 
-            targetContigs = []
-            otherContigs = []
-            unclassed = read_kraken_unclassified(unclassified)
+        targetContigs, otherContigs, unclassed = parse_kraken_translate(in_label, in_unclassified)
 
-            krakenRecord = read_kraken_labels(labels)
+        print('kraken.targetContigs = {}'.format(len(targetContigs)))
+        print('kraken.otherContigs = {}'.format(len(otherContigs)))
+        print('kraken.unclassed = {}'.format(len(unclassed)))
 
-            for contig, classification in krakenRecord.taxonomy.items():
-                if 'Salmonella' in classification:
-                    targetContigs.append(contig)
-                else:
-                    otherContigs.append(contig)
+        print('# of contigs on target = {}'.format(len(set(contigHits).intersection(targetContigs))))
+        print('# of contigs on non targets = {}'.format(len(set(contigHits).intersection(otherContigs))))
+        print('# of contigs on unclassed targets = {}'.format(len(set(contigHits).intersection(unclassed))))
+        print('\n')
 
-        print("kraken targetContigs = {}".format(len(targetContigs)))
-        print("kraken otherContigs = {}".format(len(otherContigs)))
-        print("kraken unclassed = {}".format(len(unclassed)))
-
-    # for contigId in uniqContigHits:
-    #     print(set(contigHits).intersection(targetContigs))
-        print(len(set(contigHits).intersection(targetContigs)))
-        print(set(contigHits).intersection(otherContigs))
-        print(set(contigHits).intersection(unclassed))
-
-        # print(contigHits)
-        # print(len(set(targetContigs).union(otherContigs).union(unclassed)))
-        # for i in noHits:
-        #     print(i)
+###############################################################################

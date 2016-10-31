@@ -25,6 +25,6 @@ KRAKEN_TAX=$HOME/Projects/CIMS/salmonella/kraken/results/translations
 
 module load kraken/0.10.5
 
-kraken-translate --db=$KRAKEN_DB "$1" > $KRAKEN_TAX/$(basename $1).sequence.labels
+kraken-translate --db=$KRAKEN_DB "$1" > $KRAKEN_TAX/$(basename $1).labels
 
 module unload kraken/0.10.5
