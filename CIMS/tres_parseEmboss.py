@@ -38,7 +38,7 @@ class Amplifier(object):
         self.r_mismatch = 0
 
 
-def Read(handle):
+def read_primersearch_result(handle):
     """ Parse output from EMBOSS primersearch.
 
     """
@@ -47,7 +47,6 @@ def Read(handle):
     for line in handle:
         if not line.strip():
             continue
-            #TODO We want to capture the primer sets that have no hits
         elif line.startswith("Primer name"):
             name = line.split()[-1]
             record.amplifiers[name] = []
@@ -88,7 +87,7 @@ class TaxRecord(object):
         self.taxonomy = {}
 
 
-def parse_kraken_labels(handle):
+def read_kraken_labels(handle):
     """ Parse the taxa labels from kraken-translate.
 
     """
@@ -100,8 +99,8 @@ def parse_kraken_labels(handle):
     return record
 
 
-def parse_kraken_unclassified(handle):
-    """
+def read_kraken_unclassified(handle):
+    """ Parse the kraken output of unclassified contigs.
 
     """
     unclassifiedContigs = []
@@ -112,16 +111,42 @@ def parse_kraken_unclassified(handle):
     return unclassifiedContigs
 
 
+def parse_amplicon_info():
+    """ Parse resulting primersearch results.
+
+    Return lists containing primer ids that did not amplify, hit more than one target, and hit one target.
+    """
+    emboss_results = file
+
+    noHits = []     # primer ids that did not amplify
+    contigHits = [] # contig ids where amplification occurred
+    multiHits = []  # primer ids that amplified more than one target
+
+    with open(emboss_results, 'r') as infile:
+
+        embossRecord = read_primersearch_result(infile)
+        for name in embossRecord.amplifiers:
+            if len(embossRecord.amplifiers[name]) == 0:
+                noHits.append(name)
+            elif len(embossRecord.amplifiers[name]) > 1:
+                multiHits.append(name)
+            for amplifier in embossRecord.amplifiers[name]:
+                contigHits.append(amplifier.contig_id)
+
+    return noHits, contigHits, multiHits
+
+
+
 if __name__ == "__main__":
 
     ## Let's parse the Emboss primer search output for an isolate/assembly
-    emboss_outfile = '/home/sim/Projects/CIMS/salmonella/embossResults/2013RAN-169-M947-14-049-Loopy_contigs4.fasta.emboss'
-    with open(emboss_outfile, 'r') as emboss_infile:
+    primersearch_result_file = '/home/sim/Projects/CIMS/salmonella/embossResults/2013RAN-169-M947-14-049-Loopy_contigs4.fasta.emboss'
+    with open(primersearch_result_file, 'r') as emboss_infile:
 
-        embossRecord = Read(emboss_infile)
+        embossRecord = read_primersearch_result(emboss_infile)
 
-        noHits = []        # lists primer ids
-        contigHits = []
+        noHits = []         # primer ids that did not amplify
+        contigHits = []     # contig ids where amplification occurred
 
         for name in embossRecord.amplifiers:
             # create list of primer pairs that did not amplify
@@ -134,11 +159,9 @@ if __name__ == "__main__":
                 # print(amplifier.contig_id)
                 contigHits.append(amplifier.contig_id)
 
-        uniqContigHits = set(contigHits)  # stores the final list of contigs that targets where amplified from
-
         print('nohits = {}'.format(len(noHits)))
         print('hits = {}'.format(len(contigHits)))
-        print('uniq_hits = {}'.format(len(uniqContigHits)))
+        print('uniq_hits = {}'.format(len(set(contigHits))
 
         ## Let's parse the kraken-translate output for the same file
         kraken_labels = '/home/sim/Projects/CIMS/salmonella/2013RAN-169-M947-14-049-Loopy_contigs4.sequence.labels'
@@ -147,9 +170,9 @@ if __name__ == "__main__":
 
             targetContigs = []
             otherContigs = []
-            unclassed = parse_kraken_unclassified(unclassified)
+            unclassed = read_kraken_unclassified(unclassified)
 
-            krakenRecord = parse_kraken_labels(labels)
+            krakenRecord = read_kraken_labels(labels)
 
             for contig, classification in krakenRecord.taxonomy.items():
                 if 'Salmonella' in classification:
