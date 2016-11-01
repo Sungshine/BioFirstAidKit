@@ -5,9 +5,8 @@
 """
 
 
-import csv
-from Bio.Emboss.PrimerSearch import InputRecord, OutputRecord, Amplifier, read
-from Bio.Emboss.Applications import PrimerSearchCommandline
+import os
+import subprocess
 
 
 __author__ = "Sung Im"
@@ -15,41 +14,29 @@ __email__ = "wla9@cdc.gov"
 __version__ = "0.1"
 
 
-# summaryTable = open('/Users/sungshine/Downloads/summary.table', 'r')
-summaryTable = open('/home/sim/Projects/CIMS/salmonella/summary.table', 'r')
-reader = csv.reader(summaryTable, delimiter="\t")
+def primer_search(reference, primersets, outpath):
+    """ Wrapper for EMBOSS primersearch program.
 
-inPrimers = InputRecord()
+    """
+    seqall = reference
+    infile = primersets
+    outfile = '{}/{}.emboss'.format(outpath, os.path.basename(reference))
 
-for line in reader:
-    inPrimers.add_primer_set(line[1], line[3], line[5])   # id, f_primer, r_primer
-# print(inPrimers)
-summaryTable.close()
-
-seqall = '/Users/sungshine/Downloads/ATCC9150.fasta'
-infile = '/Users/sungshine/Downloads/ATCC9150_Primers.txt'
-outfile = '/Users/sungshine/Downloads/atcc9150.primersearch.out'
-
-# seqall = '/home/sim/Projects/CIMS/salmonella/ATCC9150.fasta'
-# infile = '/home/sim/Projects/CIMS/salmonella/ATCC9150primers.txt'
-# outfile = '/home/sim/Projects/CIMS/salmonella/ATCC9150.primersearch.out'
-
-mismatchpercentage = 3
-
-emboss = PrimerSearchCommandline(r'/usr/bin/primersearch',
-                                 seqall=seqall,
-                                 infile=infile,
-                                 mismatchpercent=mismatchpercentage,
-                                 outfile=outfile
-                                 )
-print(emboss)
+    ps = subprocess.Popen(['primersearch',
+                           '-seqall', seqall,
+                           '-infile', infile,
+                           '-mismatchpercent', '3',
+                           '-outfile', outfile
+                           ],
+                          )
+    return ps
 
 
+if __name__ == "__main__":
 
-# handle = open("/home/sim/Projects/CIMS/salmonella/2012K-1420_LargeContigs.fna.primersearch", "r")  # pulsestar3
+    # variable file paths
+    reference = '/home/sim/Projects/CIMS/salmonella/2013RAN-169-M947-14-049-Loopy_contigs4.fasta'
+    primersets = '/home/sim/Projects/CIMS/salmonella/summary.table.format'
+    emboss_out_path = '/home/sim/Projects/CIMS/salmonella/embossResults/'
 
-    # hit_dict = read(handle)
-
-# for name in hit_dict.amplifiers:
-#     for amplifier in hit_dict.amplifiers[name]:
-#         print(name, "\n", amplifier.hit_info, "\n", amplifier.length, "\n")
+    primersearch = primer_search(reference, primersets, emboss_out_path)
