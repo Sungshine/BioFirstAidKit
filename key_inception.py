@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-""" Identify substring matches within PulseNet keys
+""" Identify substring matches within PulseNet keys.
     Given a concatenated list of all keys across:
     E. coli O157, E. coli Non-O157, Shigella & S. flexneri
 
@@ -10,13 +10,18 @@
     Usage: python key_inception.py < csv.file > | cat > < out.file >
 """
 
+
 import re
 import sys
 import csv
 import timeit
 
-start = timeit.timeit()
 
+__author__ = 'Sung Im'
+__email__ = 'wla9@cdc.gov'
+
+
+start = timeit.timeit()
 infile = sys.argv[1]
 
 e = []  # E. coli
@@ -24,49 +29,49 @@ n = []  # Non-O157
 f = []  # S. flexneri
 s = []  # Shigella
 
-with open("/home/sim/Downloads/Ecoli.csv", "rb") as efile:
-    e_reader = csv.reader(efile, delimiter=",")
+with open('/home/sim/Downloads/Ecoli.csv', 'rb') as efile:
+    e_reader = csv.reader(efile, delimiter=',')
     for i in e_reader:
         e.append(i[0])
     efile.close()
 
-with open("/home/sim/Downloads/NonO157.csv", "rb") as nfile:
-    n_reader = csv.reader(nfile, delimiter=",")
+with open('/home/sim/Downloads/NonO157.csv', 'rb') as nfile:
+    n_reader = csv.reader(nfile, delimiter=',')
     for i2 in  n_reader:
         n.append(i2[0])
     nfile.close()
 
-with open("/home/sim/Downloads/Sflexneri.csv", "rb") as ffile:
-    f_reader = csv.reader(ffile, delimiter=",")
+with open('/home/sim/Downloads/Sflexneri.csv', 'rb') as ffile:
+    f_reader = csv.reader(ffile, delimiter=',')
     for i3 in f_reader:
         f.append(i3[0])
     ffile.close()
 
-with open("/home/sim/Downloads/Shigella.csv", "rb") as sfile:
-    s_reader = csv.reader(sfile, delimiter=",")
+with open('/home/sim/Downloads/Shigella.csv', 'rb') as sfile:
+    s_reader = csv.reader(sfile, delimiter=',')
     for i4 in s_reader:
         s.append(i4[0])
     sfile.close()
 
 
-## string-ify the key ids removing the prefix possibilities
+# string-ify the key ids removing the prefix possibilities
 str_master = []
 
-with open(infile, "rb") as master:
-    master_reader = csv.reader(master, delimiter=",")
+with open(infile, 'b') as master:
+    master_reader = csv.reader(master, delimiter=',')
 
     for id in master_reader:
         fmtid = id[0]
-        if fmtid.startswith("DBS__"):
+        if fmtid.startswith('DBS__'):
             str_master.append(fmtid[10:])
-        elif fmtid.startswith("DBS_"):
+        elif fmtid.startswith('DBS_'):
             str_master.append(fmtid[9:])
-        elif fmtid.startswith("_", 4):
+        elif fmtid.startswith('_', 4):
             str_master.append(fmtid[5:])
-        elif fmtid.startswith("_", 3):
+        elif fmtid.startswith('_', 3):
             str_master.append(fmtid[4:])
         else:
-            if re.match("^[a-zA-Z0-9]", fmtid):
+            if re.match('^[a-zA-Z0-9]', fmtid):
                 str_master.append(fmtid)
 
 # make str_master unique
@@ -82,7 +87,7 @@ mydict = dict()
 for txt in str_master2:
     for id in e:
         if txt in id:
-            # print("{} in {}".format(txt, id))
+            # print('{} in {}'.format(txt, id))
             if txt in mydict:
                 mydict[txt].append(id)
             else:
@@ -109,10 +114,10 @@ for txt in str_master2:
 mytrimdict = dict((k, v) for k, v in mydict.items() if len(v) > 1)
 
 for key, value in mytrimdict.items():
-    print("{} | {}".format(key, value))
+    print('{} | {}'.format(key, value))
 
-print("First dict length = {}".format(len(mydict)))
-print("Trimmed dict length = {}".format(len(mytrimdict)))
+print('First dict length = {}'.format(len(mydict)))
+print('Trimmed dict length = {}'.format(len(mytrimdict)))
 
 end = timeit.timeit()
-print("####TIME TO PROCESS = {}".format(end - start))
+print('####TIME TO PROCESS = {}'.format(end - start))

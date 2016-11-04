@@ -1,25 +1,29 @@
-__author__ = 'Sung Im'
+#!/usr/bin/env python
+
+""" Basic k-mer counting.
+
+"""
+
+
 import sys
 
-inputFile = sys.argv[1]
 
-fastq = open(inputFile, "r")
-line = fastq.readline()
-
-while line != "":
-    if line.startswith("@"):
+__author__ = 'Sung Im'
+__email__ = 'wla9@cdc.gov'
 
 
-# with open(inputFile, "r") as f:
-#     line = f.readline()
-#     while line != "":
+def find_kmers(string, k):
+    kmers = []
+    n = len(string)
+    for i in range(0, n-k+1):
+        kmers.append(string[i:i+k])
+    return kmers
 
 
-# def find_kmers(string, k):
-#     kmers = []
-#     n = len(string)
-#     for i in range(0, n-k+1):
-#         kmers.append(string[i:i+k])
-#     return kmers
-#
-# find_kmers(inputFile, 11)
+if __name__ == '__main__':
+
+    inputFile = sys.argv[1]
+    find_kmers(inputFile, 11)
+
+    fastq = open(inputFile, 'r')
+    line = fastq.readline()
