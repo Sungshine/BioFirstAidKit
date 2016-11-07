@@ -12,7 +12,6 @@ Output: ## under construction
 
 import os
 import sys
-# from Bio.Emboss.PrimerSearch import OutputRecord, Amplifier, read
 
 
 __author__ = "Sung Im"
@@ -169,19 +168,38 @@ def read_kraken_translate(kraken_labels, kraken_unclassified):
     return targetContigs, otherContigs, unclassed
 
 
+def hash_kraken_labels(kraken_labels):
+    """ Store kraken labels into hash map for output formatting.
+
+    """
+    with open(kraken_labels, 'r') as labels:
+        hash = {}
+        for line in labels:
+            contig = line.rstrip().split('\t')[0]
+            taxa = line.rstrip().split('\t')[1].split(';')[-1]
+            if taxa in hash.keys():
+                hash[contig].append(taxa)
+            else:
+                hash[contig] = [taxa]
+
+    return hash
+
+
 if __name__ == "__main__":
 
-    # TODO the input for the directory paths should be command line arguments
+    # TODO the input for the directory paths should be command line arguments or from configuration file
     # Paths to files
-    emboss_dir = '/mnt/scicomp-groups/OID/NCEZID/DFWED/EDLB/share/projects/CIMS/Salmonella/PrimerSpecificity/embossResults/'                # sys.argv[1]
-    labels_dir = '/mnt/scicomp-groups/OID/NCEZID/DFWED/EDLB/share/projects/CIMS/Salmonella/PrimerSpecificity/krakenResults/translations/'   # sys.argv[2]
+    emboss_dir = '/mnt/scicomp-groups/OID/NCEZID/DFWED/EDLB/share/projects/CIMS/Salmonella/PrimerSpecificity/embossResults/'  # sys.argv[1]
+    labels_dir = '/mnt/scicomp-groups/OID/NCEZID/DFWED/EDLB/share/projects/CIMS/Salmonella/PrimerSpecificity/krakenResults/translations/'  # sys.argv[2]
     unclass_dir = '/mnt/scicomp-groups/OID/NCEZID/DFWED/EDLB/share/projects/CIMS/Salmonella/PrimerSpecificity/krakenResults/unclassified/'  # sys.argv[3]
 
     emboss_paths = [os.path.join(emboss_dir, fn) for fn in next(os.walk(emboss_dir))[2]]
     labels_paths = [os.path.join(labels_dir, fn) for fn in next(os.walk(labels_dir))[2]]
     unclass_paths = [os.path.join(unclass_dir, fn) for fn in next(os.walk(unclass_dir))[2]]
 
+    # TODO this path needs to come from a configuration file
     outfile = open('/home/sim/master_meow.csv', 'wb')
+
     # write the header to the file
     outfile.write(bytes('{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}\n'
                         .format('PrimerId',
@@ -211,15 +229,8 @@ if __name__ == "__main__":
         labels = labels_dir + filename.rstrip('.emboss') + '.sequence.kraken.labels'
         unclass = unclass_dir + filename.rstrip('.emboss') + '.unclassified'
 
-        with open(labels, 'r') as labels:
-            hash = {}
-            for line in labels:
-                contig = line.rstrip().split('\t')[0]
-                taxa = line.rstrip().split('\t')[1].split(';')[-1]
-                if taxa in hash.keys():
-                    hash[contig].append(taxa)
-                else:
-                    hash[contig] = [taxa]
+        # Hash the kraken labels for later output.
+        hash_labels = hash_kraken_labels(labels)
 
         with open(file, 'r') as handle:
 
@@ -237,7 +248,7 @@ if __name__ == "__main__":
                                                 filename,
                                                 amplifier.contig_id,
                                                 amplifier.amp_len,
-                                                hash[amplifier.contig_id][0],
+                                                hash_labels[amplifier.contig_id][0],
                                                 amplifier.f_mismatch,
                                                 amplifier.r_mismatch,
                                                 amplifier.f_start,
