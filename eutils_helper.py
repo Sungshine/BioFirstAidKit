@@ -17,6 +17,14 @@ __email__ = 'wla9@cdc.gov'
 __version__ = '0.1'
 
 
+#TODO Read files from GWA
+#TODO input: /scicomp/groups/OID/NCEZID/DFWED/EDLB/share/projects/PulseNetDatabaseTeam/SRRids/input_files
+#TODO Set cronjob to execute weekly
+#TODO Execute from Monolith0 so that the output files can be written to the GWA
+#TODO output: /scicomp/groups/OID/NCEZID/DFWED/EDLB/share/projects/PulseNetDatabaseTeam/SRRids/output_files
+#TODO check the organism of the bioproject
+#TODO review and deprecate script: retrieveSRR.py
+
 # globals
 esearch_base = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi'
 elink_base = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi'
