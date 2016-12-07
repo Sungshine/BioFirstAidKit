@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2.7
 
 """ Search NCBI Biosample database for SRR ids.
 
