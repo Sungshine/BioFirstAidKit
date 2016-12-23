@@ -4,10 +4,6 @@
 
     Input:  tab-delimited file containing:
             primer name, forward primer sequence, reverse primer sequence
-    Output: formatted input for EMBOSS primersearch program. Formatted file
-            will be written to current working directory with the extension,
-            '.format'
-    Usage:  python3 format_primers.py < path/to/summary.tables >
 """
 
 
