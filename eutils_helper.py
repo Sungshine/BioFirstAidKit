@@ -6,6 +6,7 @@ Given a csv file containing a header and PulseNet WGS ids.
 Usage: python eutils_helper.py < path/to/inputfile > | cat > < path/to/outputfile >
 """
 
+import os
 import sys
 import csv
 import requests
@@ -17,13 +18,25 @@ __email__ = 'wla9@cdc.gov'
 __version__ = '0.1'
 
 
-#TODO Read files from GWA
-#TODO input: /scicomp/groups/OID/NCEZID/DFWED/EDLB/share/projects/PulseNetDatabaseTeam/SRRids/input_files
 #TODO Set cronjob to execute weekly
 #TODO Execute from Monolith0 so that the output files can be written to the GWA
 #TODO output: /scicomp/groups/OID/NCEZID/DFWED/EDLB/share/projects/PulseNetDatabaseTeam/SRRids/output_files
 #TODO check the organism of the bioproject
 #TODO review and deprecate script: retrieveSRR.py
+
+
+# check for input files on GWA
+input_directory = '/scicomp/groups/OID/NCEZID/DFWED/EDLB/share/projects/PulseNetDatabaseTeam/SRRids/input_files/'
+paths = [os.path.join(input_directory,fn) for fn in next(os.walk(input_directory))[2]]
+
+if not paths:
+    print('No input files detected. Exiting program.')
+    exit()
+else:
+    for file in paths:
+        print(file)
+
+    ## TODO Open and check the file to see if it contains the proper headers/columns
 
 # globals
 esearch_base = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi'
