@@ -31,7 +31,7 @@ for line in filein:
                 out.write(line)
             else:
                 out.close()
-    elif line.startswith('stx2'):
+    elif line.startswith('>stx2'):
         if line.startswith('>'):
             fmt_file_id = line.strip('>').rstrip()
             out_file = 'stx2.fsa'
