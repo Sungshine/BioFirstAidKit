@@ -48,7 +48,7 @@ r2s = [stx1_list_r2, stx2_list_r2, stx12_list_r2, nostx_list_r2, allstx_list_r2]
 database = '/data/home/sim8/Projects/shigatoxin/database/stx'
 
 for i in range(20, 51):
-    kmer = int(i)
+    kmer = str(i)
 
     # Create output-results directories.
     out_directory = '/data/home/sim8/Projects/shigatoxin/results/k{}_results'.format(kmer)
