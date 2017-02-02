@@ -67,17 +67,22 @@ for i in range(20, 51):
         r_twos = r2
 
         if r1s.index(r_ones) == 0:
-            outfile = stx1_outfile
+            outfile = open(stx1_outfile, 'w')
             subprocess.call(['detector', '-l', '-x', database, '-k', kmer, '-1', r_ones, '-2', r_twos], stdout=outfile)
+            outfile.close()
         elif r1s.index(r_ones) == 1:
-            outfile = stx2_outfile
+            outfile = open(stx2_outfile, 'w')
             subprocess.call(['detector', '-l', '-x', database, '-k', kmer, '-1', r_ones, '-2', r_twos], stdout=outfile)
+            outfile.close()
         elif r1s.index(r_ones) == 2:
-            outfile = stx12_outfile
+            outfile = open(stx12_outfile, 'w')
             subprocess.call(['detector', '-l', '-x', database, '-k', kmer, '-1', r_ones, '-2', r_twos], stdout=outfile)
+            outfile.close()
         elif r1s.index(r_ones) == 3:
-            outfile = nostx_outfile
+            outfile = open(nostx_outfile, 'w')
             subprocess.call(['detector', '-l', '-x', database, '-k', kmer, '-1', r_ones, '-2', r_twos], stdout=outfile)
+            outfile.close()
         elif r1s.index(r_ones) == 4:
-            outfile = all_outfile
+            outfile = open(all_outfile, 'w')
             subprocess.call(['detector', '-l', '-x', database, '-k', kmer, '-1', r_ones, '-2', r_twos], stdout=outfile)
+            outfile.close()
