@@ -3,6 +3,7 @@
 """ Execute STing detection with varying k-mer lengths.
 
 Script should be executed from inside 'reads' directory.
+No other files should be in directory.
 
 """
 
@@ -25,9 +26,9 @@ def wranglePairedEnds(path):
     for file in path:
         newfile = ""
         if '_R1' in file:
-            newfile = file.replace('R1', 'R*')
+            newfile = file.replace('_R1', 'R*')
         elif '_R2' in file:
-            newfile = file.replace('R2', 'R*')
+            newfile = file.replace('_R2', 'R*')
         if newfile not in pair_hash:
             pair_hash[newfile] = [file]
         else:
@@ -52,8 +53,8 @@ if __name__ == '__main__':
     # Command line arguments.
     opt_parse = argparse.ArgumentParser(description='Launch STing Utilities on a directory of reads.')
     opt_parse.add_argument('-i', '--input-directory', dest='indir', required=True, help='Path to directory containing paired read files.')
-    opt_parse.add_argument('-d', '--database', dest='db', required=True, help='Path to database + prefix.')
-    opt_parse.add_argument('-o', '--outdir', dest='outdir', required=True, help='Path to results directory.')
+    # opt_parse.add_argument('-d', '--database', dest='db', required=True, help='Path to database + prefix.')
+    # opt_parse.add_argument('-o', '--outdir', dest='outdir', required=True, help='Path to results directory.')
     args = opt_parse.parse_args()
 
     # Designate pointers to absolute paths.
@@ -61,5 +62,6 @@ if __name__ == '__main__':
     reads_hash = wranglePairedEnds(readpaths)
 
     # Path to database
-    database = args.db
+    # database = args.db
 
+    # Path to output directories.
