@@ -65,16 +65,15 @@ if __name__ == '__main__':
     # Path to database
     database = args.db
 
-    for k in range(20, 23):
+    for k in range(20, 36):
         kmer = str(k)
         out_directory = '{}/k{}_results'.format(args.outdir, kmer)
         check_for_directory(out_directory)
 
-        agg_results = '{}/k{}_aggresults.csv'.format(args.outdir, kmer)
-        agg_handle = open(agg_results, 'wa')
-
-        agg_writer = csv.writer(agg_handle, delimiter=',')
-        agg_writer.writerow('this is where the header will go.')
+        # agg_results = '{}/k{}_aggresults.csv'.format(args.outdir, kmer)
+        # agg_handle = open(agg_results, 'wa')
+        # agg_writer = csv.writer(agg_handle, delimiter=',')
+        # agg_writer.writerow('this is where the header will go.')
 
         for key in reads_hash:
             r1 = reads_hash.get(key)[0]
@@ -94,12 +93,10 @@ if __name__ == '__main__':
             captured_output = ps.stdout
 
             out_handle.write(output)
+            out_handle.close()
 
-            for line in captured_output:
-                agg_writer.writerow(line.strip())
-
-            # print('printing using ps.communicate.')
-            # print(output)
+            # for line in captured_output:
+            #     agg_writer.writerow(line.strip())
 
             # writer = csv.writer(out_handle, delimiter=',')
             # write header
@@ -111,7 +108,7 @@ if __name__ == '__main__':
 
             # writer.writerow(output)
 
-            out_handle.close()
-        agg_handle.close()
+
+        # agg_handle.close()
 
 
