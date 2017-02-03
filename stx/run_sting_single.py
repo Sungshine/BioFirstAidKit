@@ -70,8 +70,11 @@ if __name__ == '__main__':
         out_directory = '{}/k{}_results'.format(args.outdir, kmer)
         check_for_directory(out_directory)
 
-        agg_results = 'k{}_results.csv'.format(kmer)
+        agg_results = '{}/k{}_results.csv'.format(args.outdir, kmer)
         agg_handle = open(agg_results, 'wa')
+
+        agg_writer = csv.writer(agg_handle, delimiter=',')
+        agg_writer.writerow('this is where the header will go.')
 
         for key in reads_hash:
             r1 = reads_hash.get(key)[0]
@@ -86,11 +89,21 @@ if __name__ == '__main__':
                                   stderr=subprocess.PIPE,
                                   )
 
-            output = ps.communicate()[0]
+            columns = ps.stderr
+            output = ps.stdout
 
-            print('printing using ps.communicate.')
-            print(output)
+            # print('printing using ps.communicate.')
+            # print(output)
 
-            # writer = csv.writer(outfile, delimiter=',')
-            # writer.writerow(outname)
+            writer = csv.writer(out_handle, delimiter=',')
+            # write header
+            # for line in columns:
+            #     writer.writerow(line)
+
+            for line in output:
+                writer.writerow(line)
+
+            out_handle.close()
+        agg_handle.close()
+
 
