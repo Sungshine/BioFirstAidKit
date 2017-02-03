@@ -84,13 +84,13 @@ if __name__ == '__main__':
             outfile = '{}/{}.csv'.format(out_directory, outname)
             out_handle = open(outfile, 'w')
 
-            ps = subprocess.check_output(['detector', '-l', '-x', database, '-k', kmer, '-1', r1, '-2', r2],
-                                         # stdout=subprocess.PIPE,
-                                         # stderr=subprocess.PIPE,
-                                         )
+            ps = subprocess.Popen(('detector', '-l', '-x', database, '-k', kmer, '-1', r1, '-2', r2),
+                                  stdout=subprocess.PIPE,
+                                  stderr=subprocess.PIPE,
+                                  )
 
-            # columns = ps.stderr
-            # output = ps.stdout
+            columns = ps.stderr
+            output = ps.communicate()[0]
 
             # print('printing using ps.communicate.')
             # print(output)
@@ -100,7 +100,7 @@ if __name__ == '__main__':
             # for line in columns:
             #     writer.writerow(line)
 
-            for line in ps:
+            for line in repr(output):
                 writer.writerow(line)
 
             out_handle.close()
