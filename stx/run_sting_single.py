@@ -91,10 +91,11 @@ if __name__ == '__main__':
 
             columns = ps.stderr
             output = ps.communicate()[0]
+            captured_output = ps.stdout
 
             out_handle.write(output)
 
-            for line in ps.stout:
+            for line in captured_output:
                 agg_writer.writerow(line.strip())
 
             # print('printing using ps.communicate.')
