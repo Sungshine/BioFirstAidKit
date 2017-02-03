@@ -92,10 +92,12 @@ if __name__ == '__main__':
             columns = ps.stderr
             output = ps.communicate()[0]
 
+            out_handle.write(output)
+
             # print('printing using ps.communicate.')
             # print(output)
 
-            writer = csv.writer(out_handle, delimiter=',')
+            # writer = csv.writer(out_handle, delimiter=',')
             # write header
             # for line in columns:
             #     writer.writerow(line)
@@ -103,7 +105,7 @@ if __name__ == '__main__':
             # for line in repr(output):
             #     writer.writerow(line.strip())
 
-            writer.writerow(output)
+            # writer.writerow(output)
 
             out_handle.close()
         agg_handle.close()
