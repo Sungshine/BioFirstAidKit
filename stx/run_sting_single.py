@@ -94,6 +94,9 @@ if __name__ == '__main__':
 
             out_handle.write(output)
 
+            for line in ps.stout:
+                agg_writer.writerow(line.strip())
+
             # print('printing using ps.communicate.')
             # print(output)
 
