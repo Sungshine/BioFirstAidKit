@@ -88,9 +88,9 @@ if __name__ == '__main__':
                                   stderr=subprocess.PIPE,
                                   )
 
-            columns = ps.stderr
+            # columns = ps.stderr
             output = ps.communicate()[0]
-            captured_output = ps.stdout
+            # captured_output = ps.stdout
 
             out_handle.write(output)
             out_handle.close()
