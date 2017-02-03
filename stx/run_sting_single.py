@@ -83,6 +83,8 @@ if __name__ == '__main__':
             outfile = '{}/{}.csv'.format(out_directory, outname)
             out_handle = open(outfile, 'w')
 
+            print('###### Processing {}\n'.format(outname))
+
             ps = subprocess.Popen(('detector', '-l', '-x', database, '-k', kmer, '-1', r1, '-2', r2),
                                   stdout=subprocess.PIPE,
                                   stderr=subprocess.PIPE,
