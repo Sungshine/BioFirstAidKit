@@ -101,7 +101,7 @@ if __name__ == '__main__':
             #     writer.writerow(line)
 
             for line in repr(output):
-                writer.writerow(line)
+                writer.writerow(line.strip())
 
             out_handle.close()
         agg_handle.close()
