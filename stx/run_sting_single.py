@@ -70,7 +70,7 @@ if __name__ == '__main__':
         out_directory = '{}/k{}_results'.format(args.outdir, kmer)
         check_for_directory(out_directory)
 
-        agg_results = '{}/k{}_results.csv'.format(args.outdir, kmer)
+        agg_results = '{}/k{}_aggresults.csv'.format(args.outdir, kmer)
         agg_handle = open(agg_results, 'wa')
 
         agg_writer = csv.writer(agg_handle, delimiter=',')
@@ -84,13 +84,13 @@ if __name__ == '__main__':
             outfile = '{}/{}.csv'.format(out_directory, outname)
             out_handle = open(outfile, 'w')
 
-            ps = subprocess.Popen(('detector', '-l', '-x', database, '-k', kmer, '-1', r1, '-2', r2),
-                                  stdout=subprocess.PIPE,
-                                  stderr=subprocess.PIPE,
-                                  )
+            ps = subprocess.check_output(['detector', '-l', '-x', database, '-k', kmer, '-1', r1, '-2', r2],
+                                         # stdout=subprocess.PIPE,
+                                         # stderr=subprocess.PIPE,
+                                         )
 
-            columns = ps.stderr
-            output = ps.stdout
+            # columns = ps.stderr
+            # output = ps.stdout
 
             # print('printing using ps.communicate.')
             # print(output)
@@ -100,7 +100,7 @@ if __name__ == '__main__':
             # for line in columns:
             #     writer.writerow(line)
 
-            for line in output:
+            for line in ps:
                 writer.writerow(line)
 
             out_handle.close()
