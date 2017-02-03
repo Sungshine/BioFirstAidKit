@@ -100,8 +100,10 @@ if __name__ == '__main__':
             # for line in columns:
             #     writer.writerow(line)
 
-            for line in repr(output):
-                writer.writerow(line.strip())
+            # for line in repr(output):
+            #     writer.writerow(line.strip())
+
+            writer.writerow(output)
 
             out_handle.close()
         agg_handle.close()
