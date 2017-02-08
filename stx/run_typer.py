@@ -62,14 +62,14 @@ if __name__ == '__main__':
     # Path to database
     database = args.db
 
-    out_directory = '{}/k{}_results'.format(args.outdir, args.kmer)
+    out_directory = '{}k{}_results'.format(args.outdir, args.kmer)
 
     wall_timer = '/usr/bin/time'
 
     for key in reads_hash:
         r1 = reads_hash.get(key)[0]
         r2 = reads_hash.get(key)[1]
-        outname = os.path.basename(key)
+        outname = os.path.basename(key).split('_')[0]
         outfile = '{}/{}.txt'.format(out_directory, outname)
         out_handle = open(outfile, 'w')
         ps = subprocess.Popen((wall_timer, '-v', 'typer', '-x', database, '-1', r1, '-2', r2, '-k', args.kmer))
