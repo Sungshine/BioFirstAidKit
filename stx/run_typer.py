@@ -81,6 +81,6 @@ if __name__ == '__main__':
 
         out, err = ps.communicate()
 
-        out_handle.write(out)
-        out_handle.write(err)
+        out_handle.write(str(out))
+        out_handle.write(str(err))
         out_handle.close()
