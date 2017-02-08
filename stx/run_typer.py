@@ -75,5 +75,5 @@ if __name__ == '__main__':
         out_handle = open(outfile, 'w')
         ps = subprocess.Popen((wall_timer, '-v', 'typer', '-x', database, '-1', r1, '-2', r2, '-k', args.kmer))
         output = ps.communicate()[0]
-        out_handle.write(output)
+        out_handle.write(str(output))
         out_handle.close()
