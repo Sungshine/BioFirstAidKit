@@ -73,8 +73,13 @@ if __name__ == '__main__':
         outname = os.path.basename(key).split('_')[0]
         outfile = '{}/{}.txt'.format(out_directory, outname)
         out_handle = open(outfile, 'w')
+
         ps = subprocess.Popen((wall_timer, '-v', 'typer', '-x', database, '-1', r1, '-2', r2, '-k', args.kmer),
-                              stdout=subprocess.PIPE)
-        output = ps.communicate()[0]
+                              stderr=subprocess.STDOUT,
+                              stdout=subprocess.PIPE,
+                              )
+
+        output = ps.communicate()
+
         out_handle.write(str(output))
         out_handle.close()
