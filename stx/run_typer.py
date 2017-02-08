@@ -79,7 +79,8 @@ if __name__ == '__main__':
                               stdout=subprocess.PIPE,
                               )
 
-        output = ps.communicate()[1]
+        out, err = ps.communicate()
 
-        out_handle.write(str(output))
+        out_handle.write(out)
+        out_handle.write(err)
         out_handle.close()
