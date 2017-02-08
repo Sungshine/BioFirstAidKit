@@ -59,8 +59,8 @@ if __name__ == '__main__':
     args = opt_parse.parse_args()
 
     # Designate pointers to absolute paths.
-    readpaths = [os.path.join(args.indir, fn) for fn in next(os.walk(args.indir))[2]]
-    reads_hash = wranglePairedEnds(readpaths)
+    read_paths = [os.path.join(args.indir, fn) for fn in next(os.walk(args.indir))[2]]
+    reads_hash = wranglePairedEnds(read_paths)
 
     # Path to database
     database = args.db
