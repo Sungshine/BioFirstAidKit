@@ -79,7 +79,7 @@ if __name__ == '__main__':
                               stdout=subprocess.PIPE,
                               )
 
-        output = ps.communicate()
+        output = ps.communicate()[1]
 
         out_handle.write(str(output))
         out_handle.close()
