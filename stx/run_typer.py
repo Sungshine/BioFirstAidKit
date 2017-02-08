@@ -63,6 +63,7 @@ if __name__ == '__main__':
     database = args.db
 
     out_directory = '{}k{}_results'.format(args.outdir, args.kmer)
+    check_for_directory(out_directory)
 
     wall_timer = '/usr/bin/time'
 
