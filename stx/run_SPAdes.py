@@ -6,7 +6,6 @@
 
 
 import os
-import csv
 import argparse
 import subprocess
 
@@ -33,6 +32,15 @@ def wranglePairedEnds(path):
     return pair_hash
 
 
+def run_spades(read1, read2, outpath):
+    """ SPAdes execution function.
+
+    """
+    print('Running spades on {}, {}.'.format(r1, r2))
+    print('Outputting results to {}.'.format(outpath))
+    subprocess.call(['spades.py', '--careful', '-1', read1, '-2', read2, '-o', outpath])
+
+
 if __name__ == '__main__':
 
 
@@ -46,4 +54,9 @@ if __name__ == '__main__':
     read_paths = [os.path.join(args.indir, fn) for fn in next(os.walk(args.indir))[2]]
     reads_hash = wranglePairedEnds(read_paths)
 
-    print(reads_hash)
+    for key in reads_hash:
+        r1 = reads_hash.get(key)[0]
+        r2 = reads_hash.get(key)[1]
+        outname = os.path.basename(key).split('_')[0]
+        spades_outdir = '{}{}'.format(args.outdir, outname)
+        run_spades(r1, r2, spades_outdir)
