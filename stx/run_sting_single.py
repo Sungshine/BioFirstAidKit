@@ -67,7 +67,7 @@ if __name__ == '__main__':
     # Path to database
     database = args.db
 
-    for k in range(args.x, args.y):
+    for k in range(int(args.x), int(args.y)):
         kmer = str(k)
         out_directory = '{}/k{}_results'.format(args.outdir, kmer)
         check_for_directory(out_directory)
