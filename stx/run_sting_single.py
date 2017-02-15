@@ -56,6 +56,8 @@ if __name__ == '__main__':
     opt_parse.add_argument('-i', '--input-directory', dest='indir', required=True, help='Path to directory containing paired read files.')
     opt_parse.add_argument('-d', '--database', dest='db', required=True, help='Path to database + prefix.')
     opt_parse.add_argument('-o', '--outdir', dest='outdir', required=True, help='Path to results directory.')
+    opt_parse.add_argument('-x', '--x-range', dest='x', required=True, help='Starting kmer size.')
+    opt_parse.add_argument('-y', '--y-range', dest='y', required=True, help='Ending kmer size')
     args = opt_parse.parse_args()
 
     # Designate pointers to absolute paths.
@@ -65,7 +67,7 @@ if __name__ == '__main__':
     # Path to database
     database = args.db
 
-    for k in range(20, 36):
+    for k in range(args.x, args.y):
         kmer = str(k)
         out_directory = '{}/k{}_results'.format(args.outdir, kmer)
         check_for_directory(out_directory)
