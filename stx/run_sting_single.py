@@ -88,15 +88,17 @@ if __name__ == '__main__':
             print('###### Processing {}\n'.format(outname))
 
             ps = subprocess.Popen(('detector', '-l', '-x', database, '-k', kmer, '-1', r1, '-2', r2),
+                                  stderr=subprocess.STDOUT,
                                   stdout=subprocess.PIPE,
-                                  stderr=subprocess.PIPE,
                                   )
 
             # columns = ps.stderr
-            output = ps.communicate()[0]
+            # output = ps.communicate()[0]
             # captured_output = ps.stdout
+            out, err = ps.communicate()
 
-            out_handle.write(output)
+            out_handle.write(str(err))
+            out_handle.write(str(out))
             out_handle.close()
 
             # for line in captured_output:
