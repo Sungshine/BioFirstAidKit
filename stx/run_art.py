@@ -26,6 +26,21 @@ if __name__ == '__main__':
 
     # Designate pointers to absolute paths.
     file_paths = [os.path.join(args.indir, fn) for fn in next(os.walk(args.indir))[2]]
+    out_dir = args.outdir
 
     for file in file_paths:
-        print(file)
+
+        outname = os.path.basename(file).split('.')[0]
+        outpath = '{}/{}'.format(out_dir, outname)
+
+        print('###### Now simulating reads for {}.'.format(outname))
+        subprocess.call(['art_illumina', '-p',
+                         '-ss', 'MSv3',
+                         '-i', file,
+                         '-l', '150',
+                         '-f', '30',
+                         '-o', outpath,
+                         '-m', '200',
+                         '-s', '10',
+                         ]
+                        )
