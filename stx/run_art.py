@@ -30,7 +30,7 @@ if __name__ == '__main__':
 
     for file in file_paths:
 
-        outname = os.path.basename(file).split('.')[0]
+        outname = '{}R'.format(os.path.basename(file).split('.')[0])
         outpath = '{}/{}'.format(out_dir, outname)
 
         print('###### Now simulating reads for {}.'.format(outname))
