@@ -68,7 +68,7 @@ if __name__ == '__main__':
         outname = os.path.basename(key).split('_')[0]
         outpath = '{}/{}.tsv'.format(args.outdir, outname)
 
-        subprocess.call([wall_timer, '-v', 'detector', '-x', database, '-1', r1, '-2', r2, '-k', '30', '-c', '-p', '>' outpath, '2>&1'])
+        subprocess.call([wall_timer, '-v', 'detector', '-x', database, '-1', r1, '-2', r2, '-k', '30', '-c', '-p', '>', outpath, '2>&1'])
 
 
 
