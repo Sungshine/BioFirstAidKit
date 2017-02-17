@@ -58,6 +58,7 @@ if __name__ == '__main__':
     read_paths = [os.path.join(args.indir, fn) for fn in next(os.walk(args.indir))[2]]
     reads_hash = wranglePairedEnds(read_paths)
 
+    check_for_directory(args.outdir)
     wall_timer = '/usr/bin/time'
     database = args.db
 
@@ -75,7 +76,6 @@ if __name__ == '__main__':
                               )
 
         err, out = ps.communicate()
-
 
         out_handle.write(out)
         out_handle.write(err)
