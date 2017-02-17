@@ -66,16 +66,17 @@ if __name__ == '__main__':
         r2 = reads_hash.get(key)[1]
 
         outname = os.path.basename(key).split('_')[0]
-        outpath = '{}/{}'.format(args.outdir, outname)
+        outpath = '{}/{}.tsv'.format(args.outdir, outname)
         out_handle = open(outpath, 'w')
 
-        ps = subprocess.Popen((wall_timer, '-v', 'detector', '-x', database, '-1', r1, '-2', r2, '-k', '30', '-c', '-p'),
-                              stderr=subprocess.PIPE,
-                              stdout=subprocess.PIPE,
+        ps = subprocess.Popen((wall_timer, '-v', 'detector', '-x', database, '-1', r1, '-2', r2, '-k', '30', '-c', '-p',
+                               '>', outpath, '2>&1'),
+                              # stderr=subprocess.PIPE,
+                              # stdout=subprocess.PIPE,
                               )
 
-        out, err = ps.communicate()
-
-        out_handle.write(err)
-        out_handle.write(out)
-        out_handle.close()
+        # out, err = ps.communicate()
+        #
+        # out_handle.write(err)
+        # out_handle.write(out)
+        # out_handle.close()
