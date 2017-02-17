@@ -44,7 +44,4 @@ if __name__ == '__main__':
 
         out_handle.write('{},{},{}'.format(filename, out, filesize))
 
-    outfile.close()
-
-
-
+    out_handle.close()
