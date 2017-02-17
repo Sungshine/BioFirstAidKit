@@ -40,7 +40,7 @@ if __name__ == '__main__':
         grep = subprocess.Popen(('grep', '\@'), stdin=cat.stdout, stdout=subprocess.PIPE)
         count = subprocess.Popen(('wc', '-l'), stdin=grep.stdout, stdout=subprocess.PIPE)
 
-        out = count.stdout
+        out = count.communicate()[0]
 
         out_handle.write('{},{},{}'.format(filename, out, filesize))
 
