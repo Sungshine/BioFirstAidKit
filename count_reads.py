@@ -19,10 +19,9 @@ if __name__ == '__main__':
 
 
     # Command line arguments.
-    opt_parse = argparse.ArgumentParser(description='Launch STing Utilities on a directory of reads.')
+    opt_parse = argparse.ArgumentParser(description='Calculate read counts on a directory of reads.')
     opt_parse.add_argument('-i', '--input-directory', dest='indir', required=True,
                            help='Path to directory containing paired read files.')
-    opt_parse.add_argument('-d', '--database', dest='db', required=True, help='Path to database + prefix.')
     opt_parse.add_argument('-o', '--outdir', dest='outdir', required=True, help='Path to results directory.')
     args = opt_parse.parse_args()
 
