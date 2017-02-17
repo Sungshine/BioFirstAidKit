@@ -66,7 +66,7 @@ if __name__ == '__main__':
         r1 = reads_hash.get(key)[0]
         r2 = reads_hash.get(key)[1]
 
-        outname = os.path.basename(key).rstrip('*')
+        outname = os.path.basename(key).split('_')[1]
         outpath = '{}/{}.tsv'.format(args.outdir, outname)
         out_handle = open(outpath, 'w')
 
