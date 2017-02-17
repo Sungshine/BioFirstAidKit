@@ -74,10 +74,8 @@ if __name__ == '__main__':
                               stdout=subprocess.PIPE,
                               )
 
-        out = ps.communicate()[0]
-        outtime = ps.communicate()[1]
+        out = ps.communicate()
 
         # out_handle.write(err)
         out_handle.write(out)
-        out_handle.write(outtime)
         out_handle.close()
