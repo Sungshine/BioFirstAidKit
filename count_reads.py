@@ -42,6 +42,6 @@ if __name__ == '__main__':
 
         out = count.communicate()[0]
 
-        out_handle.write('{},{},{}'.format(filename, out, filesize))
+        out_handle.write('{},{},{}\n'.format(filename, out, filesize))
 
     out_handle.close()
