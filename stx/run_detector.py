@@ -67,15 +67,20 @@ if __name__ == '__main__':
 
         outname = os.path.basename(key).split('_')[0]
         outpath = '{}/{}.tsv'.format(args.outdir, outname)
-        out_handle = open(outpath, 'w')
 
-        ps = subprocess.Popen((wall_timer, '-v', 'detector', '-x', database, '-1', r1, '-2', r2, '-k', '30', '-c', '-p',),
-                              # stderr=subprocess.PIPE,
-                              stdout=subprocess.PIPE,
-                              )
+        subprocess.call([wall_timer, '-v', 'detector', '-x', database, '-1', r1, '-2', r2, '-k', '30', '-c', '-p', '>' outpath, '2>&1'])
 
-        out = ps.communicate()
+
+
+        # out_handle = open(outpath, 'w')
+
+        # ps = subprocess.Popen((wall_timer, '-v', 'detector', '-x', database, '-1', r1, '-2', r2, '-k', '30', '-c', '-p',),
+        #                       # stderr=subprocess.PIPE,
+        #                       stdout=subprocess.PIPE,
+        #                       )
+
+        # out = ps.communicate()
 
         # out_handle.write(err)
-        out_handle.write(str(out))
-        out_handle.close()
+        # out_handle.write(str(out))
+        # out_handle.close()
