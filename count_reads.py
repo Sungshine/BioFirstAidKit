@@ -29,7 +29,7 @@ if __name__ == '__main__':
     read_paths = [os.path.join(args.indir, fn) for fn in next(os.walk(args.indir))[2]]
 
     outfile = '{}/readcounts.csv'.format(args.outdir)
-    outhandle = open(outfile, 'wa')
+    out_handle = open(outfile, 'wa')
 
     for file in read_paths:
 
@@ -42,7 +42,7 @@ if __name__ == '__main__':
 
         out = count.stdout
 
-        outfile.write('{},{},{}'.format(filename, out, filesize))
+        out_handle.write('{},{},{}'.format(filename, out, filesize))
 
     outfile.close()
 
