@@ -1,2 +1,2 @@
-# BioinformaticsFirstAidKit
-First aid scripts for the day to day bioinformatician
+# Bioinformatics Utilities
+Common scripts for the day-to-day bioinformatician.
