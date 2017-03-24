@@ -66,6 +66,7 @@ if __name__ == '__main__':
         for row in reader:
             try:
                 uuid = row[0].strip()
+                filename = uuid
             except IndexError:
                 continue
             # Dispatch esearch request
