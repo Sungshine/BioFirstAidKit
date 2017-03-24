@@ -55,18 +55,16 @@ if __name__ == '__main__':
     esummary_base = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi'
     efetch_base = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi'
 
-    # Globals
-    query = False
-    filename = False
-    outfile = os.path.join(args.outdir, filename)
-
     with open(args.infile, 'rU') as csvfile:
         reader = csv.reader(csvfile, delimiter=',')
         next(reader, None)  # Skip header row
+        # Globals
+        query = False
         for row in reader:
             try:
                 uuid = row[0].strip()
-                filename = uuid
+                filename = '{}.fa'.format(uuid)
+                outfile = os.path.join(args.outdir, filename)
             except IndexError:
                 continue
             # Dispatch esearch request
