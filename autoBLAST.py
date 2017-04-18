@@ -1,81 +1,79 @@
-#!/usr/bin/python3
+#!/usr/bin/env python2.7
+# -*- coding: utf-8 -*-
+
 
 """ BLAST fasta files against the O and H serotype finder database.
 
-Acknowledgement:    DTU - Center for Genomic Epidemiology
-                    http://www.genomicepidemiology.org/
+    Acknowledgement:    DTU - Center for Genomic Epidemiology
+                        http://www.genomicepidemiology.org/
 """
 
 
 import os
+import argparse
 import subprocess
 
 
-__author__ = 'Sung Im'
-__email__ = 'wla9@cdc.gov'
-__version__ = '0.2'
+def get_args():
+    """ Get command line arguments. """
+    parser = argparse.ArgumentParser(
+        description='Run BLASTn search.'
+    )
+    parser.add_argument(
+        '-i',
+        '--input-directory',
+        dest='indir',
+        required=True,
+        help='Path to directory containing query sequences.'
+    )
+    parser.add_argument(
+        '-o',
+        '--out-directory',
+        dest='outdir',
+        required=True,
+        help='Path to output directory.'
+    )
+    parser.add_argument(
+        '-db',
+        '--database',
+        required=True,
+        help='Path to BLAST databases.'
+    )
+    return parser.parse_args()
 
 
-def oBlast(queryFile, outFilePathO):
-    print ('blast O...')
-    subprocess.call(['blastn',
-                     '-query',
-                     queryFile,
-                     '-db',
-                     O_blastDB,
-                     '-outfmt',
-                     '10',
-                     '-out',
-                     outFilePathO
-                     ]
-                    )
+def o_blaster(query, outpath):
+    """ Blast query against CGE O-antigen database """
+    subprocess.call(['blastn', '-query', query, '-db', o_db,
+                     '-outfmt', '10', '-out', outpath])
 
 
-def hBlast(queryFile, outFilePathH):
-    print ('blast H...')
-    subprocess.call(['blastn',
-                     '-query',
-                     queryFile,
-                     '-db',
-                     H_blastDB,
-                     '-outfmt',
-                     '10',
-                     '-out',
-                     outFilePathH
-                     ]
-                    )
+def h_blaster(query, outpath):
+    """ Blast query against CGE H-antigen database. """
+    subprocess.call(['blastn', '-query', query, '-db', h_db,
+                     '-outfmt', '10', '-out', outpath])
 
-## uncomment the lines below for testing environment
-# inputDirectory = '/home/sim/Projects/gaTest'
-# outputDirectory = '/home/sim/Projects/gaTest/results/'
 
-## uncomment the lines below for production environment
-inputDirectory = '/home/sim/Projects/GA_assemblies/finalAssemblies'
-outputDirectory = '/home/sim/Projects/SerotypeFinder/results/'
+if __name__ == '__main__':
 
-O_blastDB = '/home/sim/Projects/SerotypeFinder/O_type.fsa'
-H_blastDB = '/home/sim/Projects/SerotypeFinder/H_type.fsa'
+    # Get command line arguments
+    args = get_args()
 
-folders = [os.path.join(inputDirectory, fn) for fn in next(os.walk(inputDirectory))[2]]
+    o_db = '{}/O_type'.format(args.database)
+    h_db = '{}/H_type'.format(args.database)
 
-for f in folders:
-    base = os.path.basename(f)
-    filename = os.path.splitext(base)[0]
-    outFilePathO = outputDirectory + filename + '.resultO'
-    outFilePathH = outputDirectory + filename + '.resultH'
+    dir = [os.path.join(args.indir, f) for f in next(os.walk(args.indir))[2]]
 
-    # blast in both O_type and H_type database
-    if '_O' in filename and '_H' in filename:
-        print(filename)
-        oBlast(f, outFilePathO)
-        hBlast(f, outFilePathH)
+    for f in dir:
+        base = os.path.basename(f)
+        filename = os.path.splitext(base)[0]
+        out_O = args.outdir + filename + '.resultO'
+        out_H = args.outdir + filename + '.resultH'
 
-    # blast in O_type database
-    elif '_H' not in filename:
-        print(filename)
-        oBlast(f, outFilePathO)
-
-    # blast in H_type database
-    elif '_O' not in filename:
-        print(filename)
-        hBlast(f, outFilePathH)
+        if '_O' in filename and '_H' in filename:
+            o_blaster(f, out_O)
+            h_blaster(f, out_H)
+        elif '_H' not in filename:
+            o_blaster(f, out_O)
+        elif '_O' not in filename:
+            h_blaster(f, out_H)
