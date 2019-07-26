@@ -1,0 +1,13 @@
+# How much total disk space do we need on the stateFTP server?
+
+SALM MAX = 16.7MB
+EC MAX = 18.9MB
+CAMP MAX = 6.1MB
+LMO MAX = 9.5MB
+
+Campylobacter: 10570 	11000 x 6.1MB =		67100 MB	->	67.1 GB
+Escherichia: 27200		28000 x 18.9MB = 	529200 MB	->	529.2 GB
+Listeria: 5150			6000 x 9.5MB =		57000 MB	->	57.0 GB
+Salmonella: 85050		90000 x 16.7MB = 	1503000 MB 	-> 	1503.0 GB
+
+TOTAL = 2156.3 GB -> 2.1563
