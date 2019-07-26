@@ -1,2 +1,2 @@
 # Bioinformatics Utilities
-Common scripts for the day-to-day bioinformatician.
+Subjectively useful scripts for the day-to-day bioinformatician.
