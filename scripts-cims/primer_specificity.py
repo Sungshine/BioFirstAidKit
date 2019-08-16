@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 
 """ Test the target specificity of a set of primer pairs.
 
@@ -168,44 +168,97 @@ def read_kraken_translate(kraken_labels, kraken_unclassified):
     return targetContigs, otherContigs, unclassed
 
 
+def hash_kraken_labels(kraken_labels):
+    """ Store kraken labels into hash map for output formatting.
+
+    """
+    with open(kraken_labels, 'r') as labels:
+        hash = {}
+        for line in labels:
+            contig = line.rstrip().split('\t')[0]
+            taxa = line.rstrip().split('\t')[1].split(';')[-1]
+            if taxa in hash.keys():
+                hash[contig].append(taxa)
+            else:
+                hash[contig] = [taxa]
+
+    return hash
+
+
 if __name__ == "__main__":
 
-    # TODO the input for the directory paths should be command line arguments
+    # TODO the input for the directory paths should be command line arguments or from configuration file
     # Paths to files
-    emboss_dir = '/mnt/scicomp-groups/OID/NCEZID/DFWED/EDLB/share/projects/CIMS/Salmonella/PrimerSpecificity/embossResults/'                # sys.argv[1]
-    labels_dir = '/mnt/scicomp-groups/OID/NCEZID/DFWED/EDLB/share/projects/CIMS/Salmonella/PrimerSpecificity/krakenResults/translations/'   # sys.argv[2]
-    unclass_dir = '/mnt/scicomp-groups/OID/NCEZID/DFWED/EDLB/share/projects/CIMS/Salmonella/PrimerSpecificity/krakenResults/unclassified/'  # sys.argv[3]
+    emboss_dir = '/scicomp/groups/OID/NCEZID/DFWED/EDLB/share/projects/CIMS/Salmonella/PrimerSpecificity/embossResults36/'              # sys.argv[1]
+    labels_dir = '/scicomp/groups/OID/NCEZID/DFWED/EDLB/share/projects/CIMS/Salmonella/PrimerSpecificity/krakenResults/translations/'   # sys.argv[2]
+    unclass_dir = '/scicomp/groups/OID/NCEZID/DFWED/EDLB/share/projects/CIMS/Salmonella/PrimerSpecificity/krakenResults/unclassified/'  # sys.argv[3]
 
     emboss_paths = [os.path.join(emboss_dir, fn) for fn in next(os.walk(emboss_dir))[2]]
     labels_paths = [os.path.join(labels_dir, fn) for fn in next(os.walk(labels_dir))[2]]
     unclass_paths = [os.path.join(unclass_dir, fn) for fn in next(os.walk(unclass_dir))[2]]
 
+    # TODO this path needs to come from a configuration file
+    outfile = open('/scicomp/groups/OID/NCEZID/DFWED/EDLB/share/projects/CIMS/Salmonella/PrimerSpecificity/reports36/report.out', 'wb')
+
+    # write the header to the file
+    outfile.write(bytes('{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}\n'
+                        .format('PrimerId',
+                                '# Hits',
+                                'RefId',
+                                'ContigId',
+                                'AmpLength',
+                                'Taxa',
+                                'ForwardMismatch',
+                                'ReverseMismatch',
+                                'ForwardStart',
+                                'ReverseStart',
+                                'ForwardPrimerSeq',
+                                'ReversePrimerSeq',
+                                'Orthogroup',
+                                ),
+                        # 'UTF-8'
+                        )
+                  )
+
     # Let's parse the Emboss primer search outputs
     for file in emboss_paths:
 
-        filename = os.path.basename(file)
-        noHits, contigHits, multiHits, ampLengths = read_amplicon_info(file)
-
-        print("##########__{}__##########".format(os.path.basename(file)))
-        print('emboss.noHits = {}'.format(len(noHits)))
-        print('emboss.contigHits = {}'.format(len(contigHits)))
-        print('emboss.uniq_hits = {}'.format(len(set(contigHits))))
-        try:
-            print('amp-length-range = {} - {}'.format(min(ampLengths), max(ampLengths)))
-        except ValueError:
-            pass
+        filename = os.path.basename(file)   # reference column
 
         # Let's parse the kraken-translate output for the same file
         labels = labels_dir + filename.rstrip('.emboss') + '.sequence.kraken.labels'
         unclass = unclass_dir + filename.rstrip('.emboss') + '.unclassified'
 
-        targetContigs, otherContigs, unclassed = read_kraken_translate(labels, unclass)
+        # Hash the kraken labels for later output.
+        hash_labels = hash_kraken_labels(labels)
 
-        print('kraken.targetContigs = {}'.format(len(targetContigs)))
-        print('kraken.otherContigs = {}'.format(len(otherContigs)))
-        print('kraken.unclassed = {}'.format(len(unclassed)))
+        with open(file, 'r') as handle:
 
-        print('# of contigs on target = {}'.format(len(set(contigHits).intersection(targetContigs))))
-        print('# of contigs on non targets = {}'.format(len(set(contigHits).intersection(otherContigs))))
-        print('# of contigs on unclassed targets = {}'.format(len(set(contigHits).intersection(unclassed))))
-        print('\n')
+            record = read_primersearch_result(handle)
+
+            for primer_id in record.amplifiers:
+
+                hit_count = len(record.amplifiers[primer_id])
+
+                for amplifier in record.amplifiers[primer_id]:
+
+                    outfile.write(bytes('{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}\n'
+                                        .format(primer_id,
+                                                hit_count,
+                                                filename,
+                                                amplifier.contig_id,
+                                                amplifier.amp_len,
+                                                hash_labels[amplifier.contig_id][0],
+                                                amplifier.f_mismatch,
+                                                amplifier.r_mismatch,
+                                                amplifier.f_start,
+                                                amplifier.r_start,
+                                                amplifier.f_primer,
+                                                amplifier.r_primer,
+                                                'tbd'
+                                                ),
+                                        # 'UTF-8'
+                                        )
+                                  )
+
+    outfile.close()
