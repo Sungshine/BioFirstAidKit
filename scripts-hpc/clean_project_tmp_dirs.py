@@ -69,8 +69,10 @@ if __name__ == '__main__':
             rm_dirs = [dir for dir in dl if datetime.fromtimestamp(os.stat(dir).st_mtime) < cutoff_date]
             for dirpath in rm_dirs:
                 try:
-                    print('Removing: {}'.format(dirpath))
-                    shutil.rmtree(dirpath)
+                    # TODO print the counts of temp files for each state-organism project!
+                    print('{}\t{}'.format(dirpath, len(rm_dirs)))
+                    # print('Removing: {}'.format(dirpath))
+                    # shutil.rmtree(dirpath)
                 except Exception as e:
                     print('Error removing {}'.format(dirpath))
                     print('{}'.format(e))
